@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  notebook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/workspace
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      HOME: /tmp
+      JUPYTER_TOKEN: ""
+      JUPYTER_PASSWORD: ""
+    command: >
+      jupyter lab
+      --ip=0.0.0.0
+      --port=8001
+      --no-browser
+      --ServerApp.token=''
+      --ServerApp.password=''
+      --ServerApp.root_dir=/workspace
+      --LabApp.default_url=/lab
+    restart: unless-stopped
+

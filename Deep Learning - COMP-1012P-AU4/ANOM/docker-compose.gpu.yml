@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  notebook:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        UV_PROJECT_EXTRAS: gpu
